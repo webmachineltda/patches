@@ -1,0 +1,18 @@
+<?php
+
+namespace Database\Patches;
+
+use Webmachine\Patches\Contracts\PatchContract;
+
+class DummyClass extends PatchContract
+{
+    /**
+     * Run the patch.
+     *
+     * @return boolean
+     */
+    public function run()
+    {
+        //
+    }
+}

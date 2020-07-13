@@ -1,0 +1,36 @@
+{
+    "name": "webmachine/patches",
+    "description": "Patches for Laravel 5",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["patches", "laravel"],
+    "authors": [
+        {
+            "name": "WebMachine",
+            "email": "contacto@webmachine.cl"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "illuminate/config": "~5.0",
+        "illuminate/database": "~5.0",
+        "illuminate/support": "~5.0"        
+    },
+    "autoload": {
+        "psr-4": {
+            "Webmachine\\Patches\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Webmachine\\Patches\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webmachine\\Patches\\PatchesServiceProvider"
+            ]
+        }
+    }  
+}
