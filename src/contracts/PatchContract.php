@@ -77,6 +77,6 @@ abstract class PatchContract
     protected function getFileName()
     {
         $reflector = new \ReflectionClass(get_class($this));
-        return basename($reflector->getFileName());
+        return basename($reflector->getFileName(), '.php');
     }
 }
