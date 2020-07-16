@@ -7,12 +7,23 @@ use Webmachine\Patches\Contracts\PatchContract;
 class DummyClass extends PatchContract
 {
     /**
+     * Determine if the patch is authorized to run.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return TRUE;
+    }
+
+    /**
      * Run the patch.
      *
      * @return boolean
      */
     public function run()
     {
-        //
+        $this->comment = '';
+        return TRUE;
     }
 }

@@ -28,6 +28,16 @@ abstract class PatchContract
     }
 
     /**
+     * Determine if the patch is authorized to run.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return TRUE;
+    }
+
+    /**
      * Run
      *  
      * @return boolean
@@ -58,13 +68,13 @@ abstract class PatchContract
             'comment' => $this->comment
         ]);
     }
-
+    
     /**
      * Get Patch FileName
      * 
      * @return string
      */
-    public function getFileName()
+    protected function getFileName()
     {
         $reflector = new \ReflectionClass(get_class($this));
         return basename($reflector->getFileName());

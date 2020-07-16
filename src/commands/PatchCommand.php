@@ -46,19 +46,24 @@ class PatchCommand extends Command
         
         if(class_exists($patch_classpath)) {
             $patch = new $patch_classpath($this);
-            if (! $this->confirmToProceed()) {
+            if (!$patch->authorize()) {
+                $this->error("$patch_class Patch Not Authorized");
                 return;
             }
-            if($patch->wasRunned() && !$this->option('force')) {
+            if (!$this->confirmToProceed()) {
+                return;
+            }
+            if ($patch->wasRunned() && !$this->option('force')) {
                 $this->error("$patch_class Patch was already runned!");
                 return;
             }
             $this->alert("Running $patch_class Patch");
-            if($patch->run()) {
+            if ($patch->run()) {
                 // save patch log
                 $patch->log();
             } else {
                 $this->error("$patch_class Patch Error");
+                return;
             }
         } else {
             $this->error("$patch_class Patch Not Found");
