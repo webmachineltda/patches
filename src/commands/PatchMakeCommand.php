@@ -82,7 +82,7 @@ class PatchMakeCommand extends Command
         }
 
         $stub = $this->files->get(__DIR__ . '/../database/patches/blank.stub');
-        $file = $this->getClassName($name) . '.php';
+        $file = date('Y_m_d_His') . '_' . $this->getClassName($name) . '.php';
         $this->files->put(
             $patches_dir . '/' . $file,
             $this->populateStub($name, $stub)

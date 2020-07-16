@@ -4,7 +4,6 @@ namespace Webmachine\Patches\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
-use Webmachine\Patches\Models\PatchLog;
 
 class PatchCommand extends Command
 {
@@ -45,19 +44,19 @@ class PatchCommand extends Command
         $patch_class = $this->argument('patch_class');
         $patch_classpath = "\Database\Patches\\$patch_class";
         
-        if(class_exists($patch_classpath) && $patch_class != 'Patch') {
+        if(class_exists($patch_classpath)) {
+            $patch = new $patch_classpath($this);
             if (! $this->confirmToProceed()) {
                 return;
             }
-            if($this->wasRunned($patch_class) && !$this->option('force')) {
+            if($patch->wasRunned() && !$this->option('force')) {
                 $this->error("$patch_class Patch was already runned!");
                 return;
             }
-            $patch = new $patch_classpath($this);
             $this->alert("Running $patch_class Patch");
             if($patch->run()) {
                 // save patch log
-                $this->log($patch);
+                $patch->log();
             } else {
                 $this->error("$patch_class Patch Error");
             }
@@ -65,32 +64,5 @@ class PatchCommand extends Command
             $this->error("$patch_class Patch Not Found");
             return;
         }
-    }
-
-    /**
-     * Patch Log
-     * 
-     * @param Database\Patches\Patch $patch
-     * @return void
-     */
-    protected function log($patch)
-    {
-        $this->info($patch->comment);
-        PatchLog::create([
-            'patch' => str_replace('Database\Patches\\', '', get_class($patch)),
-            'comment' => $patch->comment
-        ]);
-    }
-
-    /**
-     * Checks if a patch was previously runned
-     * 
-     * @param string $patch_class
-     * @return boolean
-     */
-    protected function wasRunned($patch_class)
-    {
-        $n_runs = PatchLog::where('patch', $patch_class)->count();
-        return $n_runs > 0;
     }
 }
