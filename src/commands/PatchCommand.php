@@ -22,7 +22,7 @@ class PatchCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Patch';
+    protected $description = 'Run a Patch';
 
     /**
      * Create a new command instance.

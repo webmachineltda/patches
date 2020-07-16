@@ -4,6 +4,7 @@ namespace Webmachine\Patches;
 use Illuminate\Support\ServiceProvider;
 use Webmachine\Patches\Commands\PatchMakeCommand;
 use Webmachine\Patches\Commands\PatchCommand;
+use Webmachine\Patches\Commands\PatchLogCommand;
 
 class PatchesServiceProvider extends ServiceProvider {
     
@@ -25,6 +26,7 @@ class PatchesServiceProvider extends ServiceProvider {
             $this->commands([
                 PatchMakeCommand::class,
                 PatchCommand::class,
+                PatchLogCommand::class,
             ]);
         }
     }

@@ -34,6 +34,10 @@ Run Patch
 ``` bash
 $ php artisan patch MyPatch
 ```
+Show Patch Log
+``` bash
+$ php artisan patch:log
+```
 
 ## License
 

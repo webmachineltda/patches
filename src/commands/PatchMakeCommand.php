@@ -22,7 +22,7 @@ class PatchMakeCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new migration file';
+    protected $description = 'Create a new Patch file';
 
     /**
      * The filesystem instance.
